@@ -1,31 +1,46 @@
+
 #include "Engine.h"
+
+namespace estebo {
 
 void Engine::Initialize()
 {
-	GenerateBalls(10);
+	sceneManager.ChangeScene(&menu);
 }
 
 void Engine::Run()
 {
-	for (Ball* ball : balls)
+	while (!WindowShouldClose())
 	{
-		ball->CheckCollision(GetScreenWidth(), GetScreenHeight());
-		ball->Move();
+		sceneManager.Update();
+		sceneManager.Draw();
 	}
-	for (Ball* ball : balls)
-	{
-		ball->Draw();
+}
+
+void Engine::Update()
+{
+	sceneManager.Update();
+	if (IsKeyPressed(KEY_A)) {
+		sceneManager.ChangeScene(&menu);
 	}
+	if (IsKeyPressed(KEY_S)) {
+		sceneManager.ChangeScene(&play);
+	}
+}
+
+void Engine::Draw()
+{
+	BeginDrawing();
+
+	ClearBackground(BLACK);
+	sceneManager.Draw();
+	EndDrawing();
 }
 
 void Engine::Shutdown()
 {
-	balls.clear();
+	sceneManager.ChangeScene(nullptr);
+	CloseWindow();
 }
 
-void Engine::GenerateBalls(int ballNumber)
-{
-	for (int i = 0; i < ballNumber; i++) {
-		balls.push_back(new Ball(Ball::RandomPos(), Ball::RandomRadius(), Ball::RandomRadius(), Ball::RandomColor()));
-	}
 }
