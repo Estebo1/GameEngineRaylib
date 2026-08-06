@@ -28,6 +28,8 @@
     <ClInclude Include="include\Ball.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Canvas.h" />
+    <ClInclude Include="include\estebo_gui.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -43,6 +45,8 @@
     <ClCompile Include="src\Ball.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Canvas.cpp" />
+    <ClCompile Include="src\estebo_gui.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\icon.ico">

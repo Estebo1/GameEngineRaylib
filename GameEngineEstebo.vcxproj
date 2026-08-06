@@ -302,7 +302,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\Ball.h" />
+    <ClInclude Include="include\Canvas.h" />
     <ClInclude Include="include\Engine.h" />
+    <ClInclude Include="include\estebo_gui.h" />
     <ClInclude Include="include\Menu.h" />
     <ClInclude Include="include\Play.h" />
     <ClInclude Include="include\resource_dir.h" />
@@ -311,7 +313,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Ball.cpp" />
+    <ClCompile Include="src\Canvas.cpp" />
     <ClCompile Include="src\Engine.cpp" />
+    <ClCompile Include="src\estebo_gui.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\Play.cpp" />

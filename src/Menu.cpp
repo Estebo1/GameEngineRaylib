@@ -29,10 +29,9 @@ namespace estebo {
 
 	void Menu::Draw()
 	{
-		for (Ball* ball : balls)
-		{
-			ball->Draw();
-		}
+		ClearBackground(RAYWHITE);
+		menuGUI.Draw();
+		playGUI.Draw();
 	}
 	void Menu::GenerateBalls(int ballNumber)
 	{

@@ -27,6 +27,8 @@ void estebo::Play::Update()
 
 void estebo::Play::Draw()
 {
+	ClearBackground(BLACK);
+
 	for (Ball* ball : balls)
 	{
 		ball->Draw();

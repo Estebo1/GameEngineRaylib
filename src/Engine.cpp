@@ -12,8 +12,8 @@ void Engine::Run()
 {
 	while (!WindowShouldClose())
 	{
-		sceneManager.Update();
-		sceneManager.Draw();
+		Update();
+		Draw();
 	}
 }
 
@@ -21,19 +21,24 @@ void Engine::Update()
 {
 	sceneManager.Update();
 	if (IsKeyPressed(KEY_A)) {
+		printf("A key pressed\n");
 		sceneManager.ChangeScene(&menu);
 	}
 	if (IsKeyPressed(KEY_S)) {
+		printf("S key pressed\n");
 		sceneManager.ChangeScene(&play);
 	}
+	sceneManager.Update();
 }
 
 void Engine::Draw()
 {
 	BeginDrawing();
 
-	ClearBackground(BLACK);
+	//ClearBackground(RAYWHITE);
+
 	sceneManager.Draw();
+
 	EndDrawing();
 }
 

@@ -2,11 +2,15 @@
 #include "Scene.h"
 #include "Ball.h"
 #include <vector>
+#include "raygui.h"
+#include "estebo_gui.h"
 
 namespace estebo {
 	class Menu : public Scene
 	{
 	public:
+		MenuGUI menuGUI;
+		PlayGUI playGUI;
 		Menu();
 		~Menu();
 		void OnEnter() override;
