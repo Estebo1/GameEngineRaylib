@@ -4,6 +4,9 @@
 #include <vector>
 #include "EventBus.h"
 #include "Player.h"
+#include "Ship.h"
+#include "EntityManager.h"
+#include "Bullet.h"
 
 namespace estebo {
 	class Play : public Scene, EventListener
@@ -24,6 +27,9 @@ namespace estebo {
 	private:
 		std::vector<Ball*> balls;
 		void GenerateBalls(int ballNumber);
+		EntityManager entityManager;
+		Ship* ship;
+		Bullet* bullet;
 		Player* player;
 	};
 }

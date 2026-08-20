@@ -10,10 +10,15 @@ namespace estebo {
 
 	void Play::OnEnter()
 	{
+		listen("onClick");
+		ship = new Ship();
+		bullet = new Bullet();
 		GenerateBalls(1);
 		listen("grab_coin");
 		listen("enemu_hit");
 		listen("algo");
+		entityManager.Add(ship);
+		entityManager.Add(bullet);
 	}
 
 	void Play::OnExit()
@@ -23,6 +28,7 @@ namespace estebo {
 
 	void Play::Update()
 	{
+		ship->Update();
 		for (Ball* ball : balls)
 		{
 			ball->CheckCollision(GetScreenWidth(), GetScreenHeight());
@@ -35,6 +41,7 @@ namespace estebo {
 
 	void Play::Draw()
 	{
+		ship->Draw();
 		ClearBackground(BLACK);
 
 		for (Ball* ball : balls)

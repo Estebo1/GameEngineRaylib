@@ -302,8 +302,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\Ball.h" />
+    <ClInclude Include="include\Bullet.h" />
     <ClInclude Include="include\Canvas.h" />
     <ClInclude Include="include\Engine.h" />
+    <ClInclude Include="include\Entity.h" />
+    <ClInclude Include="include\EntityManager.h" />
     <ClInclude Include="include\estebo_gui.h" />
     <ClInclude Include="include\EventBus.h" />
     <ClInclude Include="include\Menu.h" />
@@ -312,11 +315,15 @@
     <ClInclude Include="include\resource_dir.h" />
     <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\SceneManager.h" />
+    <ClInclude Include="include\Ship.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Ball.cpp" />
+    <ClCompile Include="src\Bullet.cpp" />
     <ClCompile Include="src\Canvas.cpp" />
     <ClCompile Include="src\Engine.cpp" />
+    <ClCompile Include="src\Entity.cpp" />
+    <ClCompile Include="src\EntityManager.cpp" />
     <ClCompile Include="src\estebo_gui.cpp" />
     <ClCompile Include="src\EventBus.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -325,6 +332,7 @@
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\SceneManager.cpp" />
+    <ClCompile Include="src\Ship.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\icon.ico" />

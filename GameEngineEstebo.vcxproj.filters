@@ -32,6 +32,10 @@
     <ClInclude Include="include\estebo_gui.h" />
     <ClInclude Include="include\EventBus.h" />
     <ClInclude Include="include\Player.h" />
+    <ClInclude Include="include\Entity.h" />
+    <ClInclude Include="include\Ship.h" />
+    <ClInclude Include="include\EntityManager.h" />
+    <ClInclude Include="include\Bullet.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -51,6 +55,10 @@
     <ClCompile Include="src\estebo_gui.cpp" />
     <ClCompile Include="src\EventBus.cpp" />
     <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\Entity.cpp" />
+    <ClCompile Include="src\Ship.cpp" />
+    <ClCompile Include="src\EntityManager.cpp" />
+    <ClCompile Include="src\Bullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\icon.ico">
