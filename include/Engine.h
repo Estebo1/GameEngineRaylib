@@ -1,9 +1,6 @@
 #pragma once
-#include "SceneManager.h"
-#include "Menu.h"
-#include "Play.h"
 #include "raylib.h"
-#include "resource_dir.h"
+#include "SceneManager.h"
 
 namespace estebo {
 	class Engine
@@ -15,9 +12,10 @@ namespace estebo {
 		void Draw();
 		void Shutdown();
 	private:
-		SceneManager sceneManager;
-		Menu menu;
-		Play play;
+		SceneManager& sceneMgr = SceneManager::Get();
+
+		int screenWidth = 800;
+		int screenHeight = 600;
 	};
 
 }

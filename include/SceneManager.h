@@ -1,16 +1,75 @@
 #pragma once
 #include "Scene.h"
-namespace estebo {
-	class SceneManager
-	{
-	private:
-		Scene* currentScene = nullptr;
+#include <string>
+#include <unordered_map>
 
-		public:
-			SceneManager() = default;
-			~SceneManager() = default;
-			void ChangeScene(Scene* scene);
-			void Update();
-			void Draw();
-	};
+namespace estebo {
+    class SceneManager
+    {
+        std::unordered_map<std::string, Scene*> scenes;
+        Scene* current = nullptr;
+        Scene* next = nullptr;
+
+        SceneManager() = default;
+        ~SceneManager()
+        {
+            if (current)
+                current->OnExit();
+            for (auto& [name, scene] : scenes)
+                delete scene;
+        }
+
+    public:
+        static SceneManager& Get()
+        {
+            static SceneManager instance;
+            return instance;
+        }
+
+        SceneManager(const SceneManager&) = delete;
+        void operator=(const SceneManager&) = delete;
+
+        // Registro explícito
+        void AddScene(const std::string& name, Scene* scene)
+        {
+            scenes[name] = scene;
+        }
+
+        // Transición de estado
+        void ChangeScene(const std::string& name)
+        {
+            auto it = scenes.find(name);
+            if (it == scenes.end())
+                return;
+            next = it->second;
+        }
+
+        // Ciclo de vida del motor
+        void Update()
+        {
+            if (current)
+            {
+                current->Update();
+            }
+            ProcessChange();
+        }
+
+        void Draw()
+        {
+            if (current)
+                current->Draw();
+        }
+
+    private:
+        void ProcessChange()
+        {
+            if (!next)
+                return;
+            if (current)
+                current->OnExit();
+            current = next;
+            next = nullptr;
+            current->OnEnter();
+        }
+    };
 }

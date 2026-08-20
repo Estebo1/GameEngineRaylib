@@ -30,6 +30,8 @@
     </ClInclude>
     <ClInclude Include="include\Canvas.h" />
     <ClInclude Include="include\estebo_gui.h" />
+    <ClInclude Include="include\EventBus.h" />
+    <ClInclude Include="include\Player.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -47,6 +49,8 @@
     </ClCompile>
     <ClCompile Include="src\Canvas.cpp" />
     <ClCompile Include="src\estebo_gui.cpp" />
+    <ClCompile Include="src\EventBus.cpp" />
+    <ClCompile Include="src\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\icon.ico">

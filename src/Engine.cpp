@@ -1,16 +1,31 @@
 
 #include "Engine.h"
+#include "resource_dir.h"	// utility header for SearchAndSetResourceDir
+#include "Menu.h"
+#include "Play.h"
 
 namespace estebo {
+	
+	void Engine::Initialize()
+	{
 
-void Engine::Initialize()
-{
-	sceneManager.ChangeScene(&menu);
-}
+		// Tell the window to use vsync and work on high DPI displays
+		SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
+		// Create the window and OpenGL context
+		InitWindow(screenWidth, screenHeight, "Hello Raylib");
+		TraceLog(LOG_INFO, "Se inicio raylib");
+		// Utility function from resource_dir.h to find the resources folder and set it as the current working directory so we can load from it
+		SearchAndSetResourceDir("resources");
+		sceneMgr.AddScene("menu", new Menu()); // Register the menu scene
+		sceneMgr.AddScene("play", new Play()); // Register the play scene
+		sceneMgr.ChangeScene("menu"); // Set the initial scene to the menu
+
+	}
 
 void Engine::Run()
 {
-	while (!WindowShouldClose())
+	// Main game loop
+	while (!WindowShouldClose()) // Detect window close button or ESC key
 	{
 		Update();
 		Draw();
@@ -19,32 +34,23 @@ void Engine::Run()
 
 void Engine::Update()
 {
-	sceneManager.Update();
-	if (IsKeyPressed(KEY_A)) {
-		printf("A key pressed\n");
-		sceneManager.ChangeScene(&menu);
-	}
-	if (IsKeyPressed(KEY_S)) {
-		printf("S key pressed\n");
-		sceneManager.ChangeScene(&play);
-	}
-	sceneManager.Update();
+	sceneMgr.Update(); // Update the current scene
 }
 
 void Engine::Draw()
 {
+	// Draw game objects here
 	BeginDrawing();
-
-	//ClearBackground(RAYWHITE);
-
-	sceneManager.Draw();
-
+	// Setup the back buffer for drawing (clear color and depth buffers)
+	ClearBackground(BLACK);
+	sceneMgr.Draw(); // Draw the current scene
 	EndDrawing();
 }
 
 void Engine::Shutdown()
 {
-	sceneManager.ChangeScene(nullptr);
+	//sceneManager.changeScene(nullptr); // Exit the current scene
+	// Cleanup and shutdown code here
 	CloseWindow();
 }
 

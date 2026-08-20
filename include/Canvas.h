@@ -2,22 +2,19 @@
 #include "raygui.h"
 //#include "raylib.h"
 namespace estebo {
-	class Canvas
-	{
-	protected:
-		Vector2 position;
-		Vector2 size;
-		bool active = false;
+    class Canvas
+    {
+    public:
+        Vector2 _position;
+        Vector2 _size;
+        bool _isActive;
 
-	public:
-		//Canvas() = default;
-		virtual ~Canvas() = default;
-		virtual void Draw() = 0;
-		virtual void DrawGUI() = 0;
-		void setPosition(float x, float y){ position = { x, y }; };
-		void setSize(float width, float height) { size = { width, height }; };
-		void show() { active = true; };
-		void hide() { active = false; };
-		void toggle() { active = !active; };
-	};
+        virtual ~Canvas() = default;
+        void draw() { if (_isActive) drawGUI(); }
+        virtual void drawGUI() = 0;
+        void show() { _isActive = true; }
+        void hide() { _isActive = false; }
+        void toggle() { _isActive = !_isActive; }
+        bool isActive() { return _isActive; }
+    };
 }

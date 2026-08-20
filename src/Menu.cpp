@@ -1,37 +1,47 @@
 #include "Menu.h"
 namespace estebo {
-	Menu::Menu()
-	{
 
+	Menu::Menu() {
+		listen("start_game");
 	}
 
-	Menu::~Menu()
-	{}
+	Menu::~Menu() {
+	}
 
-	void Menu::OnEnter()
-	{
+	void Menu::OnEnter() {
 		GenerateBalls(10);
+		menu_gui.show(); // Show the menu GUI when the menu scene is initialized
 	}
 
-	void Menu::OnExit()
-	{
+	void Menu::OnExit() {
 		balls.clear();
+		// Code to execute when exiting the menu scene
 	}
 
-	void Menu::Update()
-	{
+	void Menu::Update() {
 		for (Ball* ball : balls)
 		{
 			ball->CheckCollision(GetScreenWidth(), GetScreenHeight());
 			ball->Move();
 		}
+		// Update logic for the menu scene
+		if (IsKeyPressed(KEY_M)) {
+			menu_gui.toggle();
+			// Transition to the play scene
+		}
 	}
 
-	void Menu::Draw()
-	{
-		ClearBackground(RAYWHITE);
-		menuGUI.Draw();
-		playGUI.Draw();
+	void Menu::Draw() {
+		// draw some text using the default font
+		DrawText("Menu", 200, 200, 20, WHITE);
+		menu_gui.draw(); // draw the main menu GUI
+		DrawFPS(10, 10); // draw the FPS in the top left corner
+	}
+
+	void Menu::onEvent(EventData e) {
+		if (e.type == "start_game") {
+			// Transition to the play scene
+		}
 	}
 	void Menu::GenerateBalls(int ballNumber)
 	{

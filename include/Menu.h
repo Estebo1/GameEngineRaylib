@@ -2,23 +2,26 @@
 #include "Scene.h"
 #include "Ball.h"
 #include <vector>
+#include "raylib.h"
 #include "raygui.h"
 #include "estebo_gui.h"
+#include "EventBus.h"
 
 namespace estebo {
-	class Menu : public Scene
-	{
-	public:
-		MenuGUI menuGUI;
-		PlayGUI playGUI;
-		Menu();
-		~Menu();
-		void OnEnter() override;
-		void OnExit() override;
-		void Update() override;
-		void Draw() override;
-	private:
-		std::vector<Ball*> balls;
-		void GenerateBalls(int ballNumber);
-	};
+    class Menu : public Scene, public EventListener 
+    {
+        MenuGUI menu_gui;
+        int playEventId;
+    public:
+        Menu();
+        ~Menu();
+        void OnEnter() override;
+        void OnExit() override;
+        void Update() override;
+        void Draw() override;
+        void onEvent(EventData data) override;
+    private:
+        std::vector<Ball*> balls;
+        void GenerateBalls(int ballNumber);
+    };
 }
