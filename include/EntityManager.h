@@ -1,36 +1,22 @@
 #pragma once
-#include "Entity.h"
 #include <vector>
+#include "Entity.h"
 
-class EntityManager
+namespace estebo
 {
-public:
-	std::vector<Entity*> entitites;
+	class EntityManager
+	{
+	public:
+		std::vector<Entity*> entities;
 
-	EntityManager() = default;
+		EntityManager() = default;
+		~EntityManager() = default;
 
-	void Add(Entity* entity) {
-		if (entity != nullptr) {
-			entitites.push_back(entity);
-		}
-	}
-	void Update() {
-		for (Entity* entity : entitites) {
-			if (entity && entity->isActive()) {
-				entity->Update();
-			}
-		}
-	}
-	void Draw() {
-		for (Entity* entity : entitites) {
-			if (entity && entity->isActive()) {
-				entity->Draw();
-			}
-		}
-	}
-	void Clear() {
-		entitites.clear();
-	}
-};
+		void Add(Entity* entity);
+		void Clear();
 
+		void Update();
+		void Draw();
+	};
+}
 

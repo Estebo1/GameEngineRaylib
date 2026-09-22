@@ -7,8 +7,8 @@ namespace estebo {
     class SceneManager
     {
         std::unordered_map<std::string, Scene*> scenes;
-        Scene* current = nullptr;
-        Scene* next = nullptr;
+        Scene *current = nullptr;
+        Scene *next = nullptr;
 
         SceneManager() = default;
         ~SceneManager()
@@ -59,7 +59,14 @@ namespace estebo {
             if (current)
                 current->Draw();
         }
-
+        void Shutdown()
+        {
+            if (current)
+                current->OnExit();
+            for (auto& [name, scene] : scenes)
+                delete scene;
+            scenes.clear();
+        }
     private:
         void ProcessChange()
         {

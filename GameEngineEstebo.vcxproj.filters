@@ -36,6 +36,10 @@
     <ClInclude Include="include\Ship.h" />
     <ClInclude Include="include\EntityManager.h" />
     <ClInclude Include="include\Bullet.h" />
+    <ClInclude Include="include\CircleCollider.h" />
+    <ClInclude Include="include\Enemy.h" />
+    <ClInclude Include="include\json.hpp" />
+    <ClInclude Include="include\ResourceManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -59,6 +63,9 @@
     <ClCompile Include="src\Ship.cpp" />
     <ClCompile Include="src\EntityManager.cpp" />
     <ClCompile Include="src\Bullet.cpp" />
+    <ClCompile Include="src\CircleCollider.cpp" />
+    <ClCompile Include="src\Enemy.cpp" />
+    <ClCompile Include="src\ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\icon.ico">
@@ -71,8 +78,11 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="resources\wabbit_alpha.png">
+    <Image Include="resources\textures\wabbit_alpha.png">
       <Filter>Game Resource Files</Filter>
     </Image>
+    <Image Include="resources\textures\bullet.png" />
+    <Image Include="resources\textures\enemy.png" />
+    <Image Include="resources\textures\ship.png" />
   </ItemGroup>
 </Project>

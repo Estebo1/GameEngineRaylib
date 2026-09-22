@@ -22,7 +22,7 @@ namespace estebo {
 		for (Ball* ball : balls)
 		{
 			ball->CheckCollision(GetScreenWidth(), GetScreenHeight());
-			ball->Move();
+			ball->Update();
 		}
 		// Update logic for the menu scene
 		if (IsKeyPressed(KEY_M)) {

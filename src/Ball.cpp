@@ -10,8 +10,10 @@ void Ball::Draw()
 	DrawCircleV(pos, (float)radius, color);
 }
 
-void Ball::Move()
+void Ball::Update()
 {
+	CheckCollision(GetScreenWidth(), GetScreenHeight());
+
 	pos.x += (float)speedX;
 	pos.y += (float)speedY;
 }

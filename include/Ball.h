@@ -11,7 +11,7 @@ public:
 
 	Ball(Vector2 pos, int radius, int speed, Color color);
 	void Draw();
-	void Move();
+	void Update();
 	void CheckCollision(int screenWidth, int screenHeight);	
 	static Vector2 RandomPos();
 	static int RandomRadius();

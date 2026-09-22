@@ -3,20 +3,28 @@
 class Bullet : public Entity
 {
 public:
-	float speed = 20.0f;
-	Color color;
-	float radius = 2.0f;
-	Bullet() = default;
-	
-	void Draw() override {
-		DrawCircleLinesV(position, radius, WHITE);
-	}
+	float speed = 10.0f;
+	int radius = 3;
+	Bullet() {
+		active = false;
+		texture = estebo::ResourceManager::get().GetTexture("bullet.png");
+		collider.radius = (texture.width / 2.0f) * 2;
+		collider.drawDebug = true;
+	};
+
+
 	void Update() override {
-		if (!active)return;
+		if (!active) return;
 
 		position.y -= speed;
 
-		if (position.y <= 0) active = false;
+		if (position.y <= 0.0f) {
+			active = false;
+		}
+	}
+
+	void Draw() override {
+		DrawCircleV(position, radius, WHITE);
 	}
 };
 

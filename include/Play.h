@@ -7,7 +7,10 @@
 #include "Ship.h"
 #include "EntityManager.h"
 #include "Bullet.h"
+#include "Enemy.h"
 
+#define MAX_AMMO 30
+#define MAX_ENEMIES 30
 namespace estebo {
 	class Play : public Scene, EventListener
 	{
@@ -24,13 +27,25 @@ namespace estebo {
 		int grabCoin;
 		int playerScore;
 
+		float spawnTimer = 0.0f;
+		float SPAWN_INTERVAL = 2.0f; 
+
 	private:
-		std::vector<Ball*> balls;
-		void GenerateBalls(int ballNumber);
 		EntityManager entityManager;
+		
+		std::vector<Ball*> balls;
 		Ship* ship;
-		Bullet* bullet;
-		Player* player;
+		Bullet* bullets;
+		Enemy* enemies;
+
+		void GenerateBalls(int ballNumber);
+		void CheckCollisions();
+		void SpawnEnemy();
+
+		int eventId_01;
+		int eventId_02;
+		//int playerScore;
+		int grabCoinEvId;
 	};
 }
 
