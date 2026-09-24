@@ -96,6 +96,7 @@ namespace estebo {
 
 					enemies[i].position = { spawnX, spawnY };
 					enemies[i].active = true;
+					enemies[i].collider.isActive = true;
 					enemies[i].currentState = EnemyState::WALK;
 					enemies[i].collider.radius = (enemies[i].walkAnim.GetFrameRec().width * 0.4f) / 2.0f;
 					break;
