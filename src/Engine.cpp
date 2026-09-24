@@ -3,6 +3,8 @@
 #include "resource_dir.h"	
 #include "Menu.h"
 #include "Play.h"
+#include "Lose.h"
+#include "Win.h"
 
 namespace estebo {
 	
@@ -16,6 +18,8 @@ namespace estebo {
 		SearchAndSetResourceDir("resources");
 		sceneMgr.AddScene("menu", new Menu()); 
 		sceneMgr.AddScene("play", new Play()); 
+		sceneMgr.AddScene("win", new Win()); 
+		sceneMgr.AddScene("lose", new Lose()); 
 		sceneMgr.ChangeScene("menu"); 
 		listen("exit_game");
 	}

@@ -1,5 +1,7 @@
 #include "Play.h"
 #include "raylib.h"
+#include "GameManager.h"
+#include "SceneManager.h"
 #include <iostream>
 namespace estebo {
 	Play::Play()
@@ -17,9 +19,14 @@ namespace estebo {
 		listen("resume_game");
 		listen("menu_game");
 		ship = new Ship();
-		ship->SetPosition(10, 20);
+		GameManager::Get().Reset();
+		ship->SetPosition(400, 300);
 		bullets = new Bullet[MAX_AMMO];
 		enemies = new Enemy[MAX_ENEMIES];
+		pickups = new AmmoPickup[MAX_PICKUPS];
+		for (int i = 0; i < MAX_PICKUPS; i++) {
+			entityManager.Add(&pickups[i]); 
+		}
 		for (int i = 0; i < MAX_ENEMIES; i++)
 		{
 			enemies[i].target = ship;
@@ -38,6 +45,7 @@ namespace estebo {
 
 		play_gui.show();
 
+
 	}
 
 	void Play::OnExit()
@@ -46,22 +54,52 @@ namespace estebo {
 		stopListening();
 	}
 
-	void Play::Update()
-	{
+	void Play::Update() {
 		if (isPaused) return;
-
+		GameManager::Get().Update();
 		spawnTimer += GetFrameTime();
 		if (spawnTimer >= SPAWN_INTERVAL) {
 			spawnTimer = 0.0f;
-
+			//Spawn al azar de los enemigos
 			for (int i = 0; i < MAX_ENEMIES; i++) {
 				if (!enemies[i].active) {
-					enemies[i].position = { (float)GetRandomValue(0, 800), 5 }; 
+
+					int side = GetRandomValue(0, 3);
+					float spawnX = 0.0f;
+					float spawnY = 0.0f;
+					float offset = 40.0f;
+
+					switch (side) {
+					case 0:
+						spawnX = (float)GetRandomValue(-offset, GetScreenWidth() + offset);
+						spawnY = -offset;
+						break;
+					case 1: 
+						spawnX = GetScreenWidth() + offset;
+						spawnY = (float)GetRandomValue(-offset, GetScreenHeight() + offset);
+						break;
+					case 2: 
+						spawnX = (float)GetRandomValue(-offset, GetScreenWidth() + offset);
+						spawnY = GetScreenHeight() + offset;
+						break;
+						spawnX = -offset;
+						spawnY = (float)GetRandomValue(-offset, GetScreenHeight() + offset);
+						break;
+					}
+
+					enemies[i].position = { spawnX, spawnY };
 					enemies[i].active = true;
+					enemies[i].currentState = EnemyState::WALK;
+					enemies[i].collider.radius = (enemies[i].walkAnim.GetFrameRec().width * 0.4f) / 2.0f;
 					break;
 				}
 			}
 		}
+
+		if (GameManager::Get().score >= 20) {
+			EventBus::getInstance().fire("OnVictory");
+		}
+
 		CheckCollisions();
 
 		entityManager.Update();
@@ -72,7 +110,6 @@ namespace estebo {
 			EventBus::getInstance().fire("onClick", data);
 		}
 	}
-
 	void Play::Draw()
 	{
 		play_gui.draw();
@@ -85,7 +122,14 @@ namespace estebo {
 		if (data.type == "onclick") {
 			TraceLog(LOG_INFO, "Play scene received onclick event");
 		}
-
+		if (data.type == "OnPlayerDeath") {
+			GameManager::Get().CheckHighScore(); 
+			SceneManager::Get().ChangeScene("lose"); 
+		}
+		if (data.type == "OnVictory") {
+			GameManager::Get().CheckHighScore(); 
+			SceneManager::Get().ChangeScene("win"); 
+		}
 		if (data.type == "resume_game") {
 			isPaused = false;
 		}
@@ -94,33 +138,53 @@ namespace estebo {
 		}
 		if (data.type == "menu_game") {
 			isPaused = false;
-			OnExit();
 		}
 	}
 
 	void Play::CheckCollisions()
 	{
-		for (int i = 0; i < MAX_AMMO; i++)
-		{
+		//balas con enemigos
+		for (int i = 0; i < MAX_AMMO; i++) {
 			if (bullets[i].isActive()) {
-				for (int enemy = 0; enemy < MAX_ENEMIES; enemy++)
-				{
-					if (enemies[enemy].isActive()) {
-						if (bullets[i].CollidesWith(enemies[enemy])) {
-							bullets[i].active = false;
-							enemies[enemy].active = false;
+				for (int enemy = 0; enemy < MAX_ENEMIES; enemy++) {
+					if (enemies[enemy].isActive() && enemies[enemy].currentState != EnemyState::DIE && bullets[i].CollidesWith(enemies[enemy])) {
+						bullets[i].active = false;
+						enemies[enemy].TriggerDeath();
+						GameManager::Get().score += 10;
 
+						if (GetRandomValue(1, 100) <= 30) {
+							for (int p = 0; p < MAX_PICKUPS; p++) {
+								if (!pickups[p].active) {
+									pickups[p].position = enemies[enemy].position;
+									pickups[p].active = true;
+									break;
+								}
+							}
 						}
 					}
 				}
 			}
 		}
+		for (int i = 0; i < MAX_ENEMIES; i++) {
+			if (enemies[i].isActive() && enemies[i].currentState != EnemyState::DIE && enemies[i].CollidesWith(*ship)) {
+				if (!ship->isInvulnerable) {
+					enemies[i].TriggerAttack();
+					GameManager::Get().lives--;
+					ship->invulnerableTimer = 2.0f;
+					if (GameManager::Get().lives <= 0) {
+						EventBus::getInstance().fire("OnPlayerDeath");
+					}
+				}
+			}
+		}
+		//Pickups  con jugador
+		for (int i = 0; i < MAX_PICKUPS; i++) {
+			if (pickups[i].active && pickups[i].CollidesWith(*ship)) {
+				pickups[i].active = false;
 
-		for (int i = 0; i < MAX_ENEMIES; i++)
-		{
-			if (enemies[i].isActive()) {
-				if (enemies[i].CollidesWith(*ship)) {
-
+				GameManager::Get().currentAmmo += 5;
+				if (GameManager::Get().currentAmmo > GameManager::Get().maxAmmo) {
+					GameManager::Get().currentAmmo = GameManager::Get().maxAmmo;
 				}
 			}
 		}

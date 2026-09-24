@@ -3,7 +3,7 @@
 #include "raygui.h"
 #include "Eventbus.h"
 #include "SceneManager.h"
-
+#include "GameManager.h"
 
 namespace estebo {
 
@@ -59,7 +59,9 @@ namespace estebo {
         _position = { 0, 0 };
     }
     void PlayGUI::drawGUI() {
-        DrawText(TextFormat("SCORE: %04i", score), 20, 20, 30, WHITE);
+        DrawText(TextFormat("SCORE: %04i", GameManager::Get().score), 20, 20, 20, WHITE);
+        DrawText(TextFormat("LIVES: %i", GameManager::Get().lives), 20, 50, 20, RED);
+        DrawText(TextFormat("AMMO: %i", GameManager::Get().currentAmmo), 20, 80, 20, YELLOW);
 
         if (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_P)) {
             isPaused = !isPaused;
@@ -92,17 +94,22 @@ namespace estebo {
         _position = { 800 / 2.0f, 600 / 2.0f };
     };
     void LoseGUI::drawGUI() {
-        Rectangle retryButtonRect = { _position.x, _position.y, 200, 50 };
+        DrawText("GAME OVER", GetScreenWidth() / 2 - MeasureText("GAME OVER", 50) / 2, 100, 50, RED);
+
+        DrawText(TextFormat("Final Score: %i", GameManager::Get().score), GetScreenWidth() / 2 - 100, 200, 30, WHITE);
+        DrawText(TextFormat("High Score: %i", GameManager::Get().maxScore), GetScreenWidth() / 2 - 100, 240, 30, YELLOW);
+
+        Rectangle retryButtonRect = { _position.x - 100, _position.y, 200, 50 };
         if (GuiButton(retryButtonRect, "Retry Game"))
         {
             SceneManager::Get().ChangeScene("play");
             EventBus::getInstance().fire("start_game");
         }
-        Rectangle returnButtonRect = { _position.x, _position.y + 120, 200, 50 };
+        Rectangle returnButtonRect = { _position.x - 100, _position.y + 120, 200, 50 };
         if (GuiButton(returnButtonRect, "Return to Menu"))
         {
             SceneManager::Get().ChangeScene("menu");
-            EventBus::getInstance().fire("start_game");
+            EventBus::getInstance().fire("menu_game");
         }
     }
     WinGUI::WinGUI() {
@@ -111,16 +118,21 @@ namespace estebo {
         _position = { 800 / 2.0f, 600 / 2.0f };
     };
     void WinGUI::drawGUI() {
-        Rectangle retryButtonRect = { _position.x, _position.y, 200, 50 };
-        if (GuiButton(retryButtonRect, "Retry Game"))
+        DrawText("¡VICTORIA!", GetScreenWidth() / 2 - MeasureText("¡VICTORIA!", 50) / 2, 100, 50, GREEN);
+
+        DrawText(TextFormat("Final Score: %i", GameManager::Get().score), GetScreenWidth() / 2 - 100, 200, 30, WHITE);
+        DrawText(TextFormat("High Score: %i", GameManager::Get().maxScore), GetScreenWidth() / 2 - 100, 240, 30, YELLOW);
+
+        Rectangle retryButtonRect = { _position.x - 100, _position.y, 200, 50 };
+        if (GuiButton(retryButtonRect, "Play Again"))
         {
             SceneManager::Get().ChangeScene("play");
             EventBus::getInstance().fire("start_game");
         }
-        Rectangle returnButtonRect = { _position.x, _position.y + 120, 200, 50 };
+        Rectangle returnButtonRect = { _position.x - 100, _position.y + 120, 200, 50 };
         if (GuiButton(returnButtonRect, "Return to Menu"))
         {
-            EventBus::getInstance().fire("menu_game ");
+            EventBus::getInstance().fire("menu_game");
             SceneManager::Get().ChangeScene("menu");
         }
     }

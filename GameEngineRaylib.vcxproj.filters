@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{E9C7FDCE-D52A-8D73-7EB0-C5296AF258F6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{21EB8090-0D4E-1035-B6D3-48EBA215DCB7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Resource Files">
+      <UniqueIdentifier>{BAF00917-2652-E724-AFBF-2DD71B201EE4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Resource Files\textures">
+      <UniqueIdentifier>{EDCFACD8-D98A-9C84-8242-15CF6EDCE614}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows Resource Files">
+      <UniqueIdentifier>{6B659E97-575F-C7E9-40CC-5DFA2C652D56}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Ball.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Bullet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Canvas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CircleCollider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EntityManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EventBus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Play.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ResourceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SceneManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Ship.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\estebo_gui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\raygui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\resource_dir.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameManager.h" />
+    <ClInclude Include="include\AmmoPickUp.h" />
+    <ClInclude Include="AnimatorForRaylib\Include\Animator.h" />
+    <ClInclude Include="include\Win.h" />
+    <ClInclude Include="include\Lose.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Ball.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Canvas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CircleCollider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EntityManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EventBus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Play.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ResourceManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SceneManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ship.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\estebo_gui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameManager.cpp" />
+    <ClCompile Include="src\AmmoPickUp.cpp" />
+    <ClCompile Include="src\Animator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Win.cpp" />
+    <ClCompile Include="src\Lose.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\icon.ico">
+      <Filter>Windows Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="src\application.rc">
+      <Filter>Windows Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\textures\bullet.png">
+      <Filter>Game Resource Files\textures</Filter>
+    </Image>
+    <Image Include="resources\textures\enemy.png">
+      <Filter>Game Resource Files\textures</Filter>
+    </Image>
+    <Image Include="resources\textures\ship.png">
+      <Filter>Game Resource Files\textures</Filter>
+    </Image>
+    <Image Include="resources\textures\wabbit_alpha.png">
+      <Filter>Game Resource Files\textures</Filter>
+    </Image>
+    <Image Include="resources\textures\Soldier_Attack.png">
+      <Filter>Game Resource Files\textures</Filter>
+    </Image>
+    <Image Include="resources\textures\Soldier_Death.png">
+      <Filter>Game Resource Files\textures</Filter>
+    </Image>
+    <Image Include="resources\textures\Soldier_Hurt.png">
+      <Filter>Game Resource Files\textures</Filter>
+    </Image>
+    <Image Include="resources\textures\Soldier_Idle.png">
+      <Filter>Game Resource Files\textures</Filter>
+    </Image>
+    <Image Include="resources\textures\Soldier_Walk.png">
+      <Filter>Game Resource Files\textures</Filter>
+    </Image>
+    <Image Include="resources\textures\Orc_Attack.png">
+      <Filter>Game Resource Files\textures</Filter>
+    </Image>
+    <Image Include="resources\textures\Orc_Death.png">
+      <Filter>Game Resource Files\textures</Filter>
+    </Image>
+    <Image Include="resources\textures\Orc_Idle.png">
+      <Filter>Game Resource Files\textures</Filter>
+    </Image>
+    <Image Include="resources\textures\Orc_Walk.png">
+      <Filter>Game Resource Files\textures</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

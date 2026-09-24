@@ -1,45 +1,33 @@
-#pragma once
 #include "Entity.h"
-class Enemy : public Entity
-{
+
+enum class EnemyState { WALK, ATTACK, DIE };
+
+class Enemy : public Entity {
 public:
-	float speed = 2.0f;
-	int radius = 3;
+	float speed = 0.8f;
 	Entity* target = nullptr;
-	Enemy() {
-		active = false;
-		collider.radius = 3;
-		texture = estebo::ResourceManager::get().GetTexture("enemy.png");
-		collider.radius = texture.width / 2.0f;
-		collider.drawDebug = true;
-	};
 
+	float scale = 2.0f;
+	bool facingRight = true;
+	EnemyState currentState = EnemyState::WALK;
 
-	void Update() override {
-		if (!active) return;
+	float attackTimer = 0.0f;
+	float dieTimer = 0.0f;
 
-		if (target != nullptr) {
-			float dirX = target->position.x - position.x;
-			float dirY = target->position.y - position.y;
+	Animator walkAnim{ "EnemyWalk", 8, 1, 10 };
+	Animator attackAnim{ "EnemyAttack", 6, 1, 12 };
+	Animator dieAnim{ "EnemyDie", 4, 1, 8 };
 
-			float magnitude = sqrt((dirX * dirX) + (dirY * dirY));
+	Texture2D walkTex;
+	Texture2D attackTex;
+	Texture2D dieTex;
 
-			if (magnitude > 0) {
-				dirX /= magnitude;
-				dirY /= magnitude;
-			}
+	Enemy();
+	~Enemy();
 
-			position.x += dirX * speed;
-			position.y += dirY * speed;
-		}
-	}
+	void Update() override;
+	void Draw() override;
 
-	void Draw() override {
-		if (isActive() || texture.id != 0) {
-			Vector2 pos = { position.x - texture.width / 2,position.y - texture.height / 2 };
-			DrawTextureEx(texture, pos, 0.0f, 1.0f, WHITE);
-		}
-	}
-
+	void TriggerDeath();
+	void TriggerAttack();
 };
-

@@ -3,14 +3,15 @@
 #include "Ball.h"
 #include <vector>
 #include "EventBus.h"
-#include "Player.h"
 #include "Ship.h"
 #include "EntityManager.h"
 #include "Bullet.h"
 #include "estebo_gui.h"
 #include "Enemy.h"
+#include "AmmoPickUp.h"
 
 #define MAX_AMMO 30
+#define MAX_PICKUPS 10
 #define MAX_ENEMIES 30
 namespace estebo {
 	class Play : public Scene, EventListener
@@ -31,6 +32,7 @@ namespace estebo {
 		float spawnTimer = 0.0f;
 		float SPAWN_INTERVAL = 2.0f; 
 		EntityManager entityManager;
+		AmmoPickup* pickups;
 
 	private:
 		PlayGUI play_gui;

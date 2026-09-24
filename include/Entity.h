@@ -2,6 +2,7 @@
 #include "raylib.h"
 #include <string>
 #include "CircleCollider.h"
+#include "Animator.h"
 #include "ResourceManager.h"
 
 class Entity

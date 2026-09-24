@@ -24,7 +24,7 @@ namespace estebo {
 		for (Entity* entity : entities) {
 			if (entity && entity->active) {
 				entity->Draw();
-				entity->collider.DebugDraw();
+				entity->DrawDebug();
 			}
 		}
 	}
