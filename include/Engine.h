@@ -1,9 +1,10 @@
 #pragma once
 #include "raylib.h"
 #include "SceneManager.h"
+#include "EventBus.h"
 
 namespace estebo {
-	class Engine
+	class Engine : public EventListener
 	{
 	public:
 		void Initialize();
@@ -11,6 +12,9 @@ namespace estebo {
 		void Update();
 		void Draw();
 		void Shutdown();
+		void onEvent(EventData e) override;
+
+
 	private:
 		SceneManager& sceneMgr = SceneManager::Get();
 

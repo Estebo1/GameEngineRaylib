@@ -17,6 +17,7 @@ namespace estebo {
                 current->OnExit();
             for (auto& [name, scene] : scenes)
                 delete scene;
+
         }
 
     public:
@@ -29,13 +30,11 @@ namespace estebo {
         SceneManager(const SceneManager&) = delete;
         void operator=(const SceneManager&) = delete;
 
-        // Registro explícito
         void AddScene(const std::string& name, Scene* scene)
         {
             scenes[name] = scene;
         }
 
-        // Transición de estado
         void ChangeScene(const std::string& name)
         {
             auto it = scenes.find(name);
@@ -44,7 +43,6 @@ namespace estebo {
             next = it->second;
         }
 
-        // Ciclo de vida del motor
         void Update()
         {
             if (current)
@@ -66,7 +64,10 @@ namespace estebo {
             for (auto& [name, scene] : scenes)
                 delete scene;
             scenes.clear();
-        }
+
+            current = nullptr;
+            next = nullptr;
+        }   
     private:
         void ProcessChange()
         {

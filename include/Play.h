@@ -7,6 +7,7 @@
 #include "Ship.h"
 #include "EntityManager.h"
 #include "Bullet.h"
+#include "estebo_gui.h"
 #include "Enemy.h"
 
 #define MAX_AMMO 30
@@ -29,14 +30,16 @@ namespace estebo {
 
 		float spawnTimer = 0.0f;
 		float SPAWN_INTERVAL = 2.0f; 
+		EntityManager entityManager;
 
 	private:
-		EntityManager entityManager;
-		
+		PlayGUI play_gui;
+
 		std::vector<Ball*> balls;
 		Ship* ship;
 		Bullet* bullets;
 		Enemy* enemies;
+		bool isPaused = false;
 
 		void GenerateBalls(int ballNumber);
 		void CheckCollisions();

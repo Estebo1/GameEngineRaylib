@@ -10,42 +10,45 @@ namespace estebo {
 
 	void Play::OnEnter()
 	{
+		isPaused = false;
 		listen("onClick");
+		listen("OnPlayerDeath");
+		listen("pause_game");
+		listen("resume_game");
+		listen("menu_game");
 		ship = new Ship();
 		ship->SetPosition(10, 20);
 		bullets = new Bullet[MAX_AMMO];
 		enemies = new Enemy[MAX_ENEMIES];
-		GenerateBalls(1);
-	
+		for (int i = 0; i < MAX_ENEMIES; i++)
+		{
+			enemies[i].target = ship;
+			entityManager.Add(&enemies[i]);
+		}	
 
 		for (int i = 0; i < MAX_AMMO; i++)
 		{
 			entityManager.Add(&bullets[i]);
-		}
-		for (int i = 0; i < MAX_ENEMIES; i++)
-		{
-			entityManager.Add(&enemies[i]);
 		}
 
 		ship->maxBullets = MAX_AMMO;
 		ship->bullets = bullets;
 
 		entityManager.Add(ship);
+
+		play_gui.show();
+
 	}
 
 	void Play::OnExit()
 	{
-		balls.clear();
 		entityManager.Clear();
+		stopListening();
 	}
 
 	void Play::Update()
 	{
-
-		for (Ball* ball : balls)
-		{
-			ball->Update();
-		}
+		if (isPaused) return;
 
 		spawnTimer += GetFrameTime();
 		if (spawnTimer >= SPAWN_INTERVAL) {
@@ -66,18 +69,14 @@ namespace estebo {
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 			EventData data;
 			data.type = "onClick";
-			EventBus::get().fire("onClick", data);
+			EventBus::getInstance().fire("onClick", data);
 		}
 	}
 
 	void Play::Draw()
 	{
-		for (Ball* ball : balls)
-		{
-			ball->Draw();
-		}
+		play_gui.draw();
 		entityManager.Draw();
-		DrawText("Play", 200, 200, 20, WHITE);
 	}
 
 	void Play::onEvent(EventData data) {
@@ -86,14 +85,19 @@ namespace estebo {
 		if (data.type == "onclick") {
 			TraceLog(LOG_INFO, "Play scene received onclick event");
 		}
-	}
 
-	void Play::GenerateBalls(int ballNumber)
-	{
-		for (int i = 0; i < ballNumber; i++) {
-			balls.push_back(new Ball(Ball::RandomPos(), Ball::RandomRadius(), Ball::RandomRadius(), Ball::RandomColor()));
+		if (data.type == "resume_game") {
+			isPaused = false;
+		}
+		if (data.type == "pause_game") {
+			isPaused = true;
+		}
+		if (data.type == "menu_game") {
+			isPaused = false;
+			OnExit();
 		}
 	}
+
 	void Play::CheckCollisions()
 	{
 		for (int i = 0; i < MAX_AMMO; i++)

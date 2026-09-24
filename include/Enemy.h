@@ -3,8 +3,9 @@
 class Enemy : public Entity
 {
 public:
-	float speed = 4.0f;
+	float speed = 2.0f;
 	int radius = 3;
+	Entity* target = nullptr;
 	Enemy() {
 		active = false;
 		collider.radius = 3;
@@ -17,10 +18,19 @@ public:
 	void Update() override {
 		if (!active) return;
 
-		position.y += speed;
+		if (target != nullptr) {
+			float dirX = target->position.x - position.x;
+			float dirY = target->position.y - position.y;
 
-		if (position.y >= GetScreenHeight()) {
-			active = false;
+			float magnitude = sqrt((dirX * dirX) + (dirY * dirY));
+
+			if (magnitude > 0) {
+				dirX /= magnitude;
+				dirY /= magnitude;
+			}
+
+			position.x += dirX * speed;
+			position.y += dirY * speed;
 		}
 	}
 

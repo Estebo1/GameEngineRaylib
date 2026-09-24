@@ -21,7 +21,5 @@ namespace estebo {
         void Draw() override;
         void onEvent(EventData data) override;
     private:
-        std::vector<Ball*> balls;
-        void GenerateBalls(int ballNumber);
     };
 }
