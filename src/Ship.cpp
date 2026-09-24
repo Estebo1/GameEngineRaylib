@@ -76,6 +76,11 @@ void Ship::Update() {
 		position.y += speed;
 		isMoving = true;
 	}
+	if (position.x < collider.radius) position.x = collider.radius;
+	if (position.x > GetScreenWidth() - collider.radius) position.x = GetScreenWidth() - collider.radius;
+
+	if (position.y < collider.radius) position.y = collider.radius;
+	if (position.y > GetScreenHeight() - collider.radius) position.y = GetScreenHeight() - collider.radius;
 
 	if (attackTimer > 0.0f) {
 		attackTimer -= GetFrameTime();

@@ -20,7 +20,7 @@ namespace estebo {
 
             DrawText("CONTROLES E INSTRUCCIONES", 800 / 2 - MeasureText("CONTROLES E INSTRUCCIONES", 30) / 2, 150, 30, WHITE);
 
-            DrawText(" Usa los botones WASD del teclado para mover la nave", 150, 230, 20, LIGHTGRAY);
+            DrawText(" Usa los botones WASD del teclado para moverte", 150, 230, 20, LIGHTGRAY);
             DrawText(" Usa el Click Izquierdo del mouse para disparar", 150, 270, 20, LIGHTGRAY);
             DrawText(" Presiona ESC o P para pausar el juego.", 150, 310, 20, LIGHTGRAY);
             DrawText(" Sobrevive todo el tiempo que puedas.", 150, 350, 20, LIGHTGRAY);

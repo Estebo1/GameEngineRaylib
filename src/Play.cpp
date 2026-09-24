@@ -18,6 +18,8 @@ namespace estebo {
 		listen("pause_game");
 		listen("resume_game");
 		listen("menu_game");
+		listen("OnVictory");
+
 		ship = new Ship();
 		GameManager::Get().Reset();
 		ship->SetPosition(400, 300);
