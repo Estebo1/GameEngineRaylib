@@ -30,7 +30,7 @@ namespace estebo {
 		int playerScore;
 
 		float spawnTimer = 0.0f;
-		float SPAWN_INTERVAL = 2.0f; 
+		float SPAWN_INTERVAL = 1.2f; 
 		EntityManager entityManager;
 		AmmoPickup* pickups;
 

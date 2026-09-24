@@ -18,12 +18,12 @@ namespace estebo {
     {
         if (showInstructions) {
 
-            DrawText("CONTROLES E INSTRUCCIONES", 800 / 2 - MeasureText("CONTROLES E INSTRUCCIONES", 30) / 2, 150, 30, WHITE);
+            DrawText("CONTROLES E INSTRUCCIONES", 800 / 2 - MeasureText("CONTROLES E INSTRUCCIONES", 30) / 2, 150, 30, BLACK);
 
-            DrawText(" Usa los botones WASD del teclado para moverte", 150, 230, 20, LIGHTGRAY);
-            DrawText(" Usa el Click Izquierdo del mouse para disparar", 150, 270, 20, LIGHTGRAY);
-            DrawText(" Presiona ESC o P para pausar el juego.", 150, 310, 20, LIGHTGRAY);
-            DrawText(" Sobrevive todo el tiempo que puedas.", 150, 350, 20, LIGHTGRAY);
+            DrawText(" Usa los botones WASD del teclado para moverte", 150, 230, 20, BLACK);
+            DrawText(" Usa el Click Izquierdo del mouse para disparar", 150, 270, 20, BLACK);
+            DrawText(" Presiona ESC o P para pausar el juego.", 150, 310, 20, BLACK);
+            DrawText(" Sobrevive todo el tiempo que puedas.", 150, 350, 20, BLACK);
 
             Rectangle backButtonRect = { _position.x, 450, 200, 50 };
             if (GuiButton(backButtonRect, "Volver al Menu")) {
@@ -32,7 +32,7 @@ namespace estebo {
         }
         else {
 
-            DrawText("Raylib Survivor", 800 / 2 - MeasureText("Raylib Survivor", 50) / 2, 150, 50, WHITE);
+            DrawText("Raylib Survivor", 800 / 2 - MeasureText("Raylib Survivor", 50) / 2, 150, 50, BLACK);
 
             Rectangle startButtonRect = { _position.x, _position.y, 200, 50 };
             if (GuiButton(startButtonRect, "Start Game"))
@@ -61,7 +61,7 @@ namespace estebo {
     void PlayGUI::drawGUI() {
         DrawText(TextFormat("SCORE: %04i", GameManager::Get().score), 20, 20, 20, WHITE);
         DrawText(TextFormat("LIVES: %i", GameManager::Get().lives), 20, 50, 20, RED);
-        DrawText(TextFormat("AMMO: %i", GameManager::Get().currentAmmo), 20, 80, 20, YELLOW);
+        DrawText(TextFormat("AMMO: %i", GameManager::Get().currentAmmo), 20, 80, 20, BLUE);
 
         if (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_P)) {
             isPaused = !isPaused;

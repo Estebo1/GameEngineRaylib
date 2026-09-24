@@ -27,6 +27,8 @@ namespace estebo {
 	}
 
 	void Menu::Draw() {
+		Texture2D& background = ResourceManager::get().GetTexture("background.png");
+		DrawTexture(background, 0, 0, WHITE);
 		menu_gui.draw(); 
 		DrawFPS(10, 10); 
 	}

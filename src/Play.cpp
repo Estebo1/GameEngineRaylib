@@ -103,7 +103,7 @@ namespace estebo {
 			}
 		}
 
-		if (GameManager::Get().score >= 100) {
+		if (GameManager::Get().score >= 500) {
 			EventBus::getInstance().fire("OnVictory");
 		}
 
@@ -121,6 +121,8 @@ namespace estebo {
 	}
 	void Play::Draw()
 	{
+		Texture2D& background = ResourceManager::get().GetTexture("background.png");
+		DrawTexture(background, 0, 0, WHITE);
 		play_gui.draw();
 		entityManager.Draw();
 	}
@@ -158,6 +160,7 @@ namespace estebo {
 				for (int enemy = 0; enemy < MAX_ENEMIES; enemy++) {
 					if (enemies[enemy].isActive() && enemies[enemy].currentState != EnemyState::DIE && bullets[i].CollidesWith(enemies[enemy])) {
 						bullets[i].active = false;
+						enemies[enemy].collider.isActive = false;
 						enemies[enemy].TriggerDeath();
 						GameManager::Get().score += 10;
 
@@ -175,7 +178,7 @@ namespace estebo {
 			}
 		}
 		for (int i = 0; i < MAX_ENEMIES; i++) {
-			if (enemies[i].isActive() && enemies[i].currentState != EnemyState::DIE && enemies[i].CollidesWith(*ship)) {
+			if (enemies[i].isActive() && enemies[i].collider.isActive && enemies[i].currentState != EnemyState::DIE && enemies[i].CollidesWith(*ship)) {
 				if (!ship->isInvulnerable) {
 					enemies[i].TriggerAttack();
 					GameManager::Get().lives--;
@@ -207,6 +210,7 @@ namespace estebo {
 				enemies[i].position.x = (float)GetRandomValue(0, GetScreenWidth() - enemies[i].texture.width);
 				enemies[i].position.y = 0.0f;
 				enemies[i].active = true;
+				enemies[i].collider.isActive = true;
 				break;
 			}
 		}

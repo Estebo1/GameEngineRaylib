@@ -13,19 +13,21 @@ Enemy::Enemy() {
 	attackAnim.AssignSprite(attackTex);
 	dieAnim.AssignSprite(dieTex);
 
-	collider.radius = (walkAnim.GetFrameRec().width * .4f) / 2.0f;
+	collider.radius = (walkAnim.GetFrameRec().width * .3f) / 2.0f;
 	collider.drawDebug = false;
+	collider.isActive = true;
 }
 
 Enemy::~Enemy() {}
 
 void Enemy::TriggerDeath() {
 	if (currentState == EnemyState::DIE) return; 
+	collider.radius = 0.0f; 
+	currentState = EnemyState::DIE;
+	collider.isActive = false;
 
 	PlaySound(estebo::ResourceManager::get().GetSound("enemy_hit.mp3"));
-	currentState = EnemyState::DIE;
 	dieTimer = 0.5f; 
-	collider.radius = 0.0f; 
 	
 }
 

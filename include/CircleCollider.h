@@ -10,7 +10,7 @@ namespace estebo {
 		float radius = 0.0f;
         bool drawDebug = false;
 		CircleCollider(float radius = 10.0f) : radius(radius) {}
-		
+        bool isActive = true;
         void Update(Vector2 pos) {
             center = pos;
         }
