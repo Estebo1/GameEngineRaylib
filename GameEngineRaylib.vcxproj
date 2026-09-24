@@ -351,6 +351,8 @@
     <ClCompile Include="src\Win.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="resources\music\play_theme.ogg" />
+    <None Include="resources\music\win_theme.ogg" />
     <None Include="src\icon.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -375,6 +377,14 @@
     <ProjectReference Include="raylib.vcxproj">
       <Project>{8898EA18-743A-15EF-5DF5-284349369C3F}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="resources\music\lose_theme.mp3" />
+    <Media Include="resources\music\menu_theme.mp3" />
+    <Media Include="resources\sounds\enemy_attack.mp3" />
+    <Media Include="resources\sounds\enemy_hit.mp3" />
+    <Media Include="resources\sounds\player_attack.mp3" />
+    <Media Include="resources\sounds\player_pickup.mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

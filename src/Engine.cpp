@@ -14,6 +14,7 @@ namespace estebo {
 		SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
 
 		InitWindow(screenWidth, screenHeight, "Hello Raylib");
+		InitAudioDevice();
 		TraceLog(LOG_INFO, "Se inicio raylib");
 		SearchAndSetResourceDir("resources");
 		sceneMgr.AddScene("menu", new Menu()); 

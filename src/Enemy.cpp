@@ -22,6 +22,7 @@ Enemy::~Enemy() {}
 void Enemy::TriggerDeath() {
 	if (currentState == EnemyState::DIE) return; 
 
+	PlaySound(estebo::ResourceManager::get().GetSound("enemy_hit.mp3"));
 	currentState = EnemyState::DIE;
 	dieTimer = 0.5f; 
 	collider.radius = 0.0f; 
@@ -30,7 +31,7 @@ void Enemy::TriggerDeath() {
 
 void Enemy::TriggerAttack() {
 	if (currentState == EnemyState::DIE) return;
-
+	PlaySound(estebo::ResourceManager::get().GetSound("enemy_attack.mp3"));
 	currentState = EnemyState::ATTACK;
 	attackTimer = 0.4f; 
 }

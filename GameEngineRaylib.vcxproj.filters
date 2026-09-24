@@ -16,6 +16,12 @@
     <Filter Include="Windows Resource Files">
       <UniqueIdentifier>{6B659E97-575F-C7E9-40CC-5DFA2C652D56}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Resource Files\music">
+      <UniqueIdentifier>{57ceeba4-bb0a-492a-aa75-11b81929a031}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Resource Files\sounds">
+      <UniqueIdentifier>{6200bbf3-9f78-450c-8b01-83de60095dfc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Ball.h">
@@ -145,6 +151,12 @@
     <None Include="src\icon.ico">
       <Filter>Windows Resource Files</Filter>
     </None>
+    <None Include="resources\music\play_theme.ogg">
+      <Filter>Game Resource Files\music</Filter>
+    </None>
+    <None Include="resources\music\win_theme.ogg">
+      <Filter>Game Resource Files\music</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="src\application.rc">
@@ -191,5 +203,25 @@
     <Image Include="resources\textures\Orc_Walk.png">
       <Filter>Game Resource Files\textures</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="resources\music\lose_theme.mp3">
+      <Filter>Game Resource Files\music</Filter>
+    </Media>
+    <Media Include="resources\music\menu_theme.mp3">
+      <Filter>Game Resource Files\music</Filter>
+    </Media>
+    <Media Include="resources\sounds\enemy_attack.mp3">
+      <Filter>Game Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="resources\sounds\enemy_hit.mp3">
+      <Filter>Game Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="resources\sounds\player_attack.mp3">
+      <Filter>Game Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="resources\sounds\player_pickup.mp3">
+      <Filter>Game Resource Files\sounds</Filter>
+    </Media>
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@
 #include <vector>
 #include "raylib.h"
 #include "raygui.h"
+#include "EntityManager.h"
 #include "estebo_gui.h"
 #include "EventBus.h"
 

@@ -46,6 +46,9 @@ namespace estebo {
 		entityManager.Add(ship);
 
 		play_gui.show();
+		Music& playMusic = ResourceManager::get().GetMusic("play_theme.ogg");
+		playMusic.looping = true;
+		PlayMusicStream(playMusic);
 
 
 	}
@@ -54,6 +57,8 @@ namespace estebo {
 	{
 		entityManager.Clear();
 		stopListening();
+		Music& playMusic = ResourceManager::get().GetMusic("play_theme.ogg");
+		StopMusicStream(playMusic);
 	}
 
 	void Play::Update() {
@@ -98,7 +103,7 @@ namespace estebo {
 			}
 		}
 
-		if (GameManager::Get().score >= 20) {
+		if (GameManager::Get().score >= 100) {
 			EventBus::getInstance().fire("OnVictory");
 		}
 
@@ -111,6 +116,8 @@ namespace estebo {
 			data.type = "onClick";
 			EventBus::getInstance().fire("onClick", data);
 		}
+		Music& playMusic = ResourceManager::get().GetMusic("play_theme.ogg");
+		UpdateMusicStream(playMusic);
 	}
 	void Play::Draw()
 	{
@@ -183,7 +190,7 @@ namespace estebo {
 		for (int i = 0; i < MAX_PICKUPS; i++) {
 			if (pickups[i].active && pickups[i].CollidesWith(*ship)) {
 				pickups[i].active = false;
-
+				PlaySound(estebo::ResourceManager::get().GetSound("player_pickup.mp3"));
 				GameManager::Get().currentAmmo += 5;
 				if (GameManager::Get().currentAmmo > GameManager::Get().maxAmmo) {
 					GameManager::Get().currentAmmo = GameManager::Get().maxAmmo;

@@ -21,6 +21,7 @@ void Ship::fire() {
 				bullets[i].velocity.y = dirY * bullets[i].speed;
 				bullets[i].active = true;
 				GameManager::Get().currentAmmo--;
+				PlaySound(estebo::ResourceManager::get().GetSound("player_attack.mp3"));
 				break;
 			}
 		}
